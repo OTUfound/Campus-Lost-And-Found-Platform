@@ -1,0 +1,49 @@
+{% extends "items/base.html" %}
+
+{% block title %}{{ item.title }} - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        {% if item.photo %}
+            <img src="{{ item.photo.url }}" class="img-fluid rounded" alt="{{ item.title }}">
+        {% else %}
+            <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height: 400px;">
+                <p class="text-muted">No image available</p>
+            </div>
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        <h1>{{ item.title }}</h1>
+        <div class="mb-3">
+            <span class="badge bg-info">{{ item.get_item_type_display }}</span>
+            <span class="badge bg-secondary">{{ item.get_category_display }}</span>
+            {% if item.claimed %}
+                <span class="badge bg-success">Claimed</span>
+            {% else %}
+                <span class="badge bg-warning">Available</span>
+            {% endif %}
+        </div>
+        <p class="lead">{{ item.description }}</p>
+        <div class="card mb-3">
+            <div class="card-body">
+                <p><strong>Location:</strong> {{ item.location }}</p>
+                <p><strong>Posted By:</strong> {{ item.posted_by.get_full_name }}</p>
+                <p><strong>Posted Date:</strong> {{ item.created_at|date:"M d, Y H:i" }}</p>
+                <p><strong>Status:</strong> {% if item.claimed %}Claimed{% else %}Available{% endif %}</p>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <a href="{% url 'item_list' %}" class="btn btn-secondary">Back</a>
+            {% if user == item.posted_by %}
+                <a href="{% url 'edit_item' item.pk %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'delete_item' item.pk %}" class="btn btn-danger">Delete</a>
+            {% endif %}
+            <a href="{% url 'toggle_claim' item.pk %}" class="btn btn-primary">
+                {% if item.claimed %}Mark as Unclaimed{% else %}Claim Item{% endif %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

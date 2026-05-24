@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}Claim Approved - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card border-success">
+            <div class="card-header bg-success text-white">
+                <h3 class="mb-0"><i class="bi bi-check-circle me-2"></i>Claim Approved!</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-success mb-4">
+                    <h5>Contact Information Now Available</h5>
+                    <p class="mb-0">Both parties can now communicate to arrange the handover of the item.</p>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5>Item Owner</h5>
+                        <p><strong>{{ claim.item.posted_by.first_name }} {{ claim.item.posted_by.last_name }}</strong></p>
+                        {% if claim.item.posted_by.phone %}
+                        <p class="text-muted"><i class="bi bi-telephone-fill me-2 text-primary"></i>Phone: {{ claim.item.posted_by.phone }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Claimant</h5>
+                        <p><strong>{{ claim.claimant.first_name }} {{ claim.claimant.last_name }}</strong></p>
+                        {% if claim.claimant.phone %}
+                        <p class="text-muted"><i class="bi bi-telephone-fill me-2 text-primary"></i>Phone: {{ claim.claimant.phone }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <hr>
+
+                <h5 class="mb-3">Communication Options</h5>
+                <div class="row g-2 mb-4">
+                    {% if claim.claimant.phone %}
+                    <div class="col-md-6">
+                        <a href="https://wa.me/{{ claim.claimant.phone|safe }}" target="_blank" class="btn btn-success w-100">
+                            <i class="bi bi-whatsapp"></i> Contact on WhatsApp
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    <div class="col-md-6">
+                        <button class="btn btn-info w-100" data-bs-toggle="modal" data-bs-target="#phoneModal">
+                            <i class="bi bi-telephone-fill"></i> Call
+                        </button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="alert alert-info">
+                    <strong>Safety Tips:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>Meet in a public place on campus</li>
+                        <li>Verify the item matches the description before handing it over</li>
+                        <li>Keep the conversation on WhatsApp for record-keeping</li>
+                    </ul>
+                </div>
+
+                <a href="{% url 'item_detail' claim.item.pk %}" class="btn btn-primary">Back to Item</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Phone Modal -->
+<div class="modal fade" id="phoneModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Contact Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="text-muted">Claimant's Phone Number:</p>
+                <h4 class="mb-3">{{ claim.claimant.phone }}</h4>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

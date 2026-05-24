@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Resend Verification Email - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card shadow-lg border-0">
+            <div class="card-body p-5">
+                <div class="text-center mb-5">
+                    <div class="mb-4">
+                        <i class="bi bi-arrow-repeat text-primary" style="font-size: 4rem;"></i>
+                    </div>
+                    <h2 class="mb-2">Resend Verification Email</h2>
+                    <p class="text-muted mb-0">Didn't receive the email? We'll send it again</p>
+                </div>
+
+                <form method="post" class="needs-validation">
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+                        <label for="email" class="form-label">
+                            <strong>Enter your email address</strong>
+                        </label>
+                        <input type="email" name="email" id="email" class="form-control form-control-lg"
+                               placeholder="your.email@ostimteknik.edu.tr" required autofocus>
+                        <small class="text-muted d-block mt-2">
+                            We'll send you a new verification link valid for 24 hours.
+                        </small>
+                    </div>
+
+                    <div class="alert alert-info border-0 mb-4">
+                        <p class="mb-2"><strong>Troubleshooting:</strong></p>
+                        <ul class="mb-0 ps-3">
+                            <li>Check your spam or junk folder</li>
+                            <li>Make sure you entered the correct email</li>
+                            <li>Wait a few minutes before requesting another email</li>
+                        </ul>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 btn-lg mb-3">
+                        <i class="bi bi-send"></i> Resend Verification Email
+                    </button>
+
+                    <a href="{% url 'account_login' %}" class="btn btn-outline-secondary w-100">Back to Login</a>
+                </form>
+
+                <hr class="my-4">
+
+                <p class="text-center text-muted small mb-0">
+                    Don't have an account? <a href="{% url 'account_signup' %}">Register here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

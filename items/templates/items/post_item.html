@@ -1,0 +1,68 @@
+{% extends "items/base.html" %}
+
+{% block title %}{% if is_edit %}Edit Item{% else %}Post Item{% endif %} - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body p-5">
+                <h2 class="card-title mb-4">{% if is_edit %}Edit Item{% else %}Post a New Item{% endif %}</h2>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_title" class="form-label">Title</label>
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                            <div class="invalid-feedback d-block">{{ form.title.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_description" class="form-label">Description</label>
+                        {{ form.description }}
+                        {% if form.description.errors %}
+                            <div class="invalid-feedback d-block">{{ form.description.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="id_item_type" class="form-label">Item Type</label>
+                            {{ form.item_type }}
+                            {% if form.item_type.errors %}
+                                <div class="invalid-feedback d-block">{{ form.item_type.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="id_category" class="form-label">Category</label>
+                            {{ form.category }}
+                            {% if form.category.errors %}
+                                <div class="invalid-feedback d-block">{{ form.category.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_location" class="form-label">Location (Where it was lost/found)</label>
+                        {{ form.location }}
+                        {% if form.location.errors %}
+                            <div class="invalid-feedback d-block">{{ form.location.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_photo" class="form-label">Photo</label>
+                        {{ form.photo }}
+                        {% if form.photo.errors %}
+                            <div class="invalid-feedback d-block">{{ form.photo.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            {% if is_edit %}Update Item{% else %}Post Item{% endif %}
+                        </button>
+                        <a href="{% url 'item_list' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

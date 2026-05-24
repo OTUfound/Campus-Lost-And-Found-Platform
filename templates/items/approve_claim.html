@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Approve Claim - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card border-success">
+            <div class="card-header bg-success text-white">
+                <h3 class="mb-0">Approve Claim</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <strong>Item:</strong> {{ claim.item.title }}<br>
+                    <strong>Claimant:</strong> {{ claim.claimant.first_name }} {{ claim.claimant.last_name }}<br>
+                    <strong>Email:</strong> {{ claim.claimant.email }}
+                </div>
+
+                <h5>Claimant's Proof of Ownership:</h5>
+                <div class="bg-light p-3 rounded mb-4">
+                    {{ claim.proof_description }}
+                </div>
+
+                <p class="text-muted">By approving this claim, the item will be marked as resolved and the claimant will be notified.</p>
+
+                <form method="post" class="d-flex gap-2">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">Approve Claim</button>
+                    <a href="{% url 'item_detail' claim.item.pk %}" class="btn btn-outline-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

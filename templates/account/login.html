@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-5 col-lg-4">
+        <div class="text-center mb-4">
+            <h1 class="fw-bold mb-1">Welcome Back</h1>
+            <p class="text-muted">Sign in with your university email</p>
+        </div>
+
+        <div class="card">
+            <div class="card-body p-4">
+                <form method="POST" novalidate>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-semibold">Email</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                               placeholder="yourname@ostimteknik.edu.tr" required autofocus>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label for="password" class="form-label fw-semibold mb-0">Password</label>
+                            <a href="{% url 'account_reset_password' %}" class="small" style="color:var(--otu-red);">Forgot password?</a>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="password" required>
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password', this)" tabindex="-1">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 fw-semibold py-2">Sign In</button>
+                </form>
+            </div>
+        </div>
+
+        <p class="text-center text-muted small mt-3">
+            Don't have an account?
+            <a href="{% url 'account_signup' %}" style="color:var(--otu-red);text-decoration:none;font-weight:600;">Register here</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

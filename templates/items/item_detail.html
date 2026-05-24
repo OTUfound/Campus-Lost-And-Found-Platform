@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ item.title }} - OTU Found{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <a href="{% url 'item_list' %}" class="btn btn-outline-secondary btn-sm">&larr; Back to Browse</a>
+</div>
+
+<div class="row g-4">
+    <!-- Main item info -->
+    <div class="col-lg-8">
+        <div class="card">
+            {% if item.photo %}
+            <img src="{{ item.photo.url }}" class="card-img-top w-100" alt="{{ item.title }}"
+                 style="max-height:420px;object-fit:cover;border-radius:12px 12px 0 0;">
+            {% endif %}
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <span class="badge mb-2 {% if item.item_type == 'lost' %}bg-danger{% else %}bg-success{% endif %} px-3 py-2">
+                            {{ item.get_item_type_display }}
+                        </span>
+                        <h2 class="mb-0">{{ item.title }}</h2>
+                        <p class="text-muted small mb-0">Posted {{ item.created_at|date:'M d, Y' }} by {{ item.posted_by.first_name }} {{ item.posted_by.last_name }}</p>
+                    </div>
+                    <span class="badge fs-6 {% if item.status == 'open' %}bg-info{% elif item.status == 'claim_pending' %}bg-warning text-dark{% else %}bg-success{% endif %}">
+                        {% if item.status == 'open' %}Open
+                        {% elif item.status == 'claim_pending' %}Claim Pending
+                        {% else %}Resolved{% endif %}
+                    </span>
+                </div>
+
+                <hr>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-sm-6">
+                        <p class="text-muted small text-uppercase fw-semibold mb-1" style="letter-spacing:.5px;">Category</p>
+                        <p class="mb-0 fw-semibold"><i class="bi bi-tag me-1" style="color:var(--otu-red)"></i>{{ item.get_category_display }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="text-muted small text-uppercase fw-semibold mb-1" style="letter-spacing:.5px;">Location</p>
+                        <p class="mb-0 fw-semibold"><i class="bi bi-geo-alt me-1" style="color:var(--otu-red)"></i>{{ item.location }}</p>
+                    </div>
+                </div>
+
+                {% if item.dropoff_location %}
+                <div class="alert alert-warning mb-4" style="border-left: 4px solid #ffc107;">
+                    <i class="bi bi-geo-alt-fill me-2"></i><strong>Pick-up Point:</strong> This item has been dropped off at <strong>{{ item.get_dropoff_location_display }}</strong>.
+                </div>
+                {% endif %}
+
+                <h5>Description</h5>
+                <p class="text-muted">{{ item.description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions sidebar -->
+    <div class="col-lg-4">
+        {% if user.is_authenticated %}
+            {% if user == item.posted_by %}
+            <!-- Owner view -->
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    <h6 class="mb-0">Your Item</h6>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'edit_item' item.pk %}" class="btn btn-outline-primary w-100 mb-2">
+                        <i class="bi bi-pencil me-1"></i>Edit Item
+                    </a>
+                    <a href="{% url 'delete_item' item.pk %}" class="btn btn-outline-danger w-100">
+                        <i class="bi bi-trash me-1"></i>Delete Item
+                    </a>
+                </div>
+            </div>
+
+            {% if claims %}
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h6 class="mb-0">Claims ({{ claims.count }})</h6>
+                </div>
+                <div class="card-body p-0">
+                    {% for claim in claims %}
+                    <div class="p-3 {% if not forloop.last %}border-bottom{% endif %}">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <strong class="small">{{ claim.claimant.first_name }} {{ claim.claimant.last_name }}</strong>
+                            <span class="badge {% if claim.status == 'pending' %}bg-warning text-dark{% elif claim.status == 'approved' %}bg-success{% else %}bg-secondary{% endif %}">
+                                {{ claim.get_status_display }}
+                            </span>
+                        </div>
+                        <p class="text-muted small mb-0">{{ claim.created_at|date:'M d, Y H:i' }}</p>
+                        {% if claim.status == 'pending' %}
+                        <div class="mt-2 p-2 bg-light rounded small">{{ claim.proof_description|truncatewords:20 }}</div>
+                        <div class="d-flex gap-2 mt-2">
+                            <a href="{% url 'approve_claim' claim.pk %}" class="btn btn-sm btn-success flex-grow-1">Approve</a>
+                            <a href="{% url 'reject_claim' claim.pk %}" class="btn btn-sm btn-outline-danger flex-grow-1">Reject</a>
+                        </div>
+                        {% elif claim.status == 'approved' %}
+                        <div class="alert alert-success small mt-2 mb-0 py-2"><i class="bi bi-check-circle me-1"></i>Approved!</div>
+                        <a href="{% url 'claim_approved' claim.pk %}" class="btn btn-sm btn-success w-100 mt-2">View Contact</a>
+                        {% else %}
+                        <div class="alert alert-secondary small mt-2 mb-0 py-2"><i class="bi bi-x-circle me-1"></i>Rejected</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% elif user_claim %}
+            <!-- Claimant who already claimed -->
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h6 class="mb-0">Your Claim</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted small">Status</span>
+                        <span class="badge {% if user_claim.status == 'pending' %}bg-warning text-dark{% elif user_claim.status == 'approved' %}bg-success{% else %}bg-secondary{% endif %}">
+                            {{ user_claim.get_status_display }}
+                        </span>
+                    </div>
+                    <p class="text-muted small">Submitted {{ user_claim.created_at|date:'M d, Y' }}</p>
+                    {% if user_claim.status == 'approved' %}
+                    <a href="{% url 'claim_approved' user_claim.pk %}" class="btn btn-success w-100">
+                        <i class="bi bi-telephone me-1"></i>View Contact Details
+                    </a>
+                    {% elif user_claim.status == 'pending' %}
+                    <div class="alert alert-info small mb-0 py-2">Your claim is under review by the item owner.</div>
+                    {% else %}
+                    <div class="alert alert-secondary small mb-0 py-2">Your claim was rejected. You may not re-claim this item.</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% elif item.status != 'resolved' %}
+            <!-- Not yet claimed -->
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h6 class="mb-0">Is this yours?</h6>
+                </div>
+                <div class="card-body">
+                    {% if item.dropoff_location %}
+                    <p class="text-muted small mb-3">This item was dropped off at <strong>{{ item.get_dropoff_location_display }}</strong>. Please visit them directly to claim your item.</p>
+                    <div class="alert alert-info py-2 mb-0 small">
+                        <i class="bi bi-info-circle me-1"></i> No need to submit a claim here.
+                    </div>
+                    {% else %}
+                    <p class="text-muted small mb-3">Provide proof of ownership to claim this item. The owner will review your submission.</p>
+                    <a href="{% url 'claim_item' item.pk %}" class="btn btn-success w-100 fw-semibold">
+                        <i class="bi bi-hand-index me-1"></i>Submit a Claim
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% else %}
+            <div class="card">
+                <div class="card-body text-center text-muted py-4">
+                    <i class="bi bi-check-circle text-success" style="font-size:2.5rem;"></i>
+                    <p class="mt-2 mb-0 small">This item has been resolved.</p>
+                </div>
+            </div>
+            {% endif %}
+
+        {% else %}
+        <!-- Not logged in -->
+        <div class="card">
+            <div class="card-body text-center py-4">
+                <i class="bi bi-lock" style="font-size:2.5rem;color:var(--otu-red);"></i>
+                <p class="mt-3 mb-3 text-muted small">Log in with your university email to claim items.</p>
+                <a href="{% url 'account_login' %}" class="btn btn-primary w-100">Login</a>
+                <a href="{% url 'account_signup' %}" class="btn btn-outline-secondary w-100 mt-2">Register</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

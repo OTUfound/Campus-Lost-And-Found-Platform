@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Claim Item - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <a href="{% url 'item_list' %}" class="btn btn-outline-secondary mb-3">← Back to Browse</a>
+
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Claim Item: {{ item.title }}</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info mb-4">
+                    <strong>Important:</strong> To claim this item, provide specific details that prove you own it.
+                    The item's owner will review your submission. Be as detailed as possible.
+                </div>
+
+                <form method="post" class="needs-validation">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Item Details (for reference)</strong></label>
+                        <div class="card bg-light mb-3">
+                            <div class="card-body">
+                                <p><strong>{{ item.title }}</strong></p>
+                                <p class="text-muted">{{ item.description }}</p>
+                                <p class="text-muted small">
+                                    Category: {{ item.get_category_display }} | Location: {{ item.location }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.proof_description.id_for_label }}" class="form-label">
+                            <strong>Describe identifying features that prove ownership</strong>
+                        </label>
+                        <small class="form-text text-muted d-block mb-2">
+                            Example: "The laptop has a blue sticker on the lid, missing a key on the right side..."
+                        </small>
+                        {{ form.proof_description }}
+                        {% if form.proof_description.errors %}
+                        <div class="invalid-feedback d-block">
+                            {{ form.proof_description.errors.0 }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.preferred_contact_method.id_for_label }}" class="form-label">
+                            <strong>Preferred Contact Method</strong>
+                        </label>
+                        <small class="form-text text-muted d-block mb-2">
+                            How should the poster of the item contact you if they approve your claim?
+                        </small>
+                        {{ form.preferred_contact_method }}
+                        {% if form.preferred_contact_method.errors %}
+                        <div class="invalid-feedback d-block">
+                            {{ form.preferred_contact_method.errors.0 }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Submit Claim</button>
+                        <a href="{% url 'item_list' %}" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

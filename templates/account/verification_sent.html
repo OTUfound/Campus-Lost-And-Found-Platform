@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Verify Email - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <a href="{% url 'item_list' %}" class="btn btn-outline-secondary btn-sm mb-3">&larr; Back to Home</a>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h3 class="mb-0">Verify Your Email</h3>
+            </div>
+            <div class="card-body text-center p-5">
+                <div class="mb-4">
+                    <i class="bi bi-envelope-check text-success" style="font-size: 3rem;"></i>
+                </div>
+                <p class="lead mb-3">Check your email for a verification link</p>
+                <p class="text-muted mb-4">
+                    We've sent a verification email. Click the link in the email to complete your registration.
+                </p>
+
+                <div class="alert alert-info">
+                    <small>
+                        <strong>Note:</strong> The verification link will expire in 24 hours.
+                        If you don't see it, check your spam folder or <a href="{% url 'account_login' %}">try signing in again</a>.
+                    </small>
+                </div>
+
+                <a href="{% url 'account_login' %}" class="btn btn-primary">Back to Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}OTU Found - Campus Lost & Found{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --otu-red: #8A1B31;
+            --otu-red-hover: #6d1527;
+            --otu-dark: #1a1a1a;
+            --otu-gray: #595959;
+            --otu-light-bg: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--otu-light-bg);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #333;
+        }
+
+        /* ---- Navbar ---- */
+        .otu-navbar {
+            background-color: var(--otu-dark) !important;
+            border-bottom: 3px solid var(--otu-red);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .navbar-brand img { height: 46px; }
+        .navbar-brand span { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.5px; }
+        .nav-link { color: rgba(255,255,255,0.8) !important; font-size: 0.92rem; transition: color 0.2s; }
+        .nav-link:hover, .nav-link.active { color: #fff !important; }
+        .navbar .btn-outline-light { border-color: rgba(255,255,255,0.5); font-size: 0.88rem; }
+        .navbar .btn-otu { background-color: var(--otu-red); border-color: var(--otu-red); color: #fff; font-size: 0.88rem; }
+        .navbar .btn-otu:hover { background-color: var(--otu-red-hover); border-color: var(--otu-red-hover); }
+        .dropdown-menu { border-radius: 8px; border: none; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+        .dropdown-item:hover { background-color: #f0f0f0; }
+
+        /* ---- Buttons ---- */
+        .btn-primary { background-color: var(--otu-red) !important; border-color: var(--otu-red) !important; color: #fff !important; }
+        .btn-primary:hover { background-color: var(--otu-red-hover) !important; border-color: var(--otu-red-hover) !important; }
+        .btn-outline-primary { color: var(--otu-red) !important; border-color: var(--otu-red) !important; }
+        .btn-outline-primary:hover { background-color: var(--otu-red) !important; color: #fff !important; }
+
+        /* ---- Typography ---- */
+        h1, h2, h3, h4, h5 { color: var(--otu-red); }
+        .text-muted { color: var(--otu-gray) !important; }
+        .card-header h1, .card-header h2, .card-header h3,
+        .card-header h4, .card-header h5, .card-header h6,
+        .bg-primary h1, .bg-primary h2, .bg-primary h3,
+        .bg-success h1, .bg-success h2, .bg-success h3,
+        .bg-warning h1, .bg-warning h2, .bg-warning h3,
+        .bg-danger h1, .bg-danger h2, .bg-danger h3,
+        .bg-dark h1, .bg-dark h2, .bg-dark h3 { color: inherit; }
+        .bg-primary { background-color: var(--otu-red) !important; }
+
+        /* ---- Cards ---- */
+        .card { border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .card-header { border-radius: 12px 12px 0 0 !important; border-bottom: none; }
+        .card-header.bg-primary { background-color: var(--otu-red) !important; }
+
+        /* ---- Item cards ---- */
+        .item-card { transition: transform 0.2s, box-shadow 0.2s; }
+        .item-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(138,27,49,0.15) !important; }
+        .item-badge { position: absolute; top: 10px; right: 10px; }
+
+        /* ---- Badges ---- */
+        .badge.bg-danger { background-color: var(--otu-red) !important; }
+
+        /* ---- Form controls ---- */
+        .form-control:focus, .form-select:focus {
+            border-color: var(--otu-red);
+            box-shadow: 0 0 0 0.2rem rgba(138,27,49,0.15);
+        }
+        .nav-tabs .nav-link.active { color: var(--otu-red) !important; border-color: var(--otu-red); }
+        .nav-tabs .nav-link { color: var(--otu-gray) !important; }
+        .nav-tabs .nav-link:hover { color: var(--otu-red) !important; }
+
+        /* ---- Footer ---- */
+        .otu-footer { background-color: var(--otu-dark); border-top: 3px solid var(--otu-red); color: rgba(255,255,255,0.6); }
+        .otu-footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
+        .otu-footer a:hover { color: #fff; }
+
+        /* ---- Alerts ---- */
+        .alert-info { background-color: #e8f4f8; border-color: #bee5eb; color: #0c5460; }
+
+        /* ---- Page transitions ---- */
+        main { animation: fadeIn 0.2s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    {% include 'includes/navbar.html' %}
+
+    <main class="py-4 flex-grow-1">
+        <div class="container-lg">
+            {% include 'includes/messages.html' %}
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function togglePassword(inputId, btnElement) {
+            const input = document.getElementById(inputId);
+            const icon = btnElement.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        }
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

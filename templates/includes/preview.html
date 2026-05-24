@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - OTU Found</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --otu-red: #8A1B31;
+            --otu-red-hover: #6d1527;
+            --otu-gray: #595959;
+        }
+        body { background-color: #f8f9fa; }
+        .item-card { transition: transform 0.2s; }
+        .item-card:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .btn-primary { background-color: var(--otu-red) !important; border-color: var(--otu-red) !important; color: white !important; }
+        .btn-primary:hover { background-color: var(--otu-red-hover) !important; border-color: var(--otu-red-hover) !important; }
+        .text-muted { color: var(--otu-gray) !important; }
+        h1, h2, h3 { color: var(--otu-red); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-2" style="border-bottom: 3px solid var(--otu-red);">
+        <div class="container-fluid ps-2 pe-4">
+            
+            <a class="navbar-brand fw-bold d-flex align-items-center m-0 p-0" href="#">
+                <img src="logo.png" alt="OSTIM Logo" height="50" class="me-3">
+                <span class="text-white fs-4">OTU Found</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Browse Items</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Post Item</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                </ul>
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-outline-light btn-sm px-3">Login</a>
+                    <a href="#" class="btn btn-primary btn-sm px-3">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="py-5">
+        <div class="container-lg">
+            <div class="row mb-5">
+                <div class="col-md-8 mx-auto text-center">
+                    <h1 class="display-4 mb-4 fw-bold">OTU Found</h1>
+                    <p class="lead text-muted mb-4">The secure campus lost & found system for Ostime Teknik University</p>
+                    <div class="d-flex gap-2 justify-content-center">
+                        <a href="#" class="btn btn-primary btn-lg px-4 fw-bold">Browse Items</a>
+                        <a href="#" class="btn btn-success btn-lg px-4 fw-bold">Post Item</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm border-0 item-card">
+                        <div class="card-body text-center py-4">
+                            <h3 class="fw-bold mb-3">Secure</h3>
+                            <p class="text-muted">University email verification ensures only campus members can access the system.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm border-0 item-card">
+                        <div class="card-body text-center py-4">
+                            <h3 class="fw-bold mb-3">Private</h3>
+                            <p class="text-muted">No public phone numbers. Claims are verified before contact information is shared.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm border-0 item-card">
+                        <div class="card-body text-center py-4">
+                            <h3 class="fw-bold mb-3">Verified</h3>
+                            <p class="text-muted">Item owners review proof before approving claims. Protection against false claims.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

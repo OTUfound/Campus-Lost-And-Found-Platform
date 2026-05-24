@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Verify Your Email - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card shadow-lg border-0">
+            <div class="card-body p-5">
+                <div class="text-center mb-5">
+                    <div class="mb-4">
+                        <i class="bi bi-envelope-check text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    <h2 class="mb-2">Verify Your Email</h2>
+                    <p class="text-muted mb-0">Check your inbox for confirmation</p>
+                </div>
+
+                <div class="alert alert-success border-0 bg-light-success text-success mb-4">
+                    <h5 class="mb-2">Verification email sent!</h5>
+                    <p class="mb-0">We've sent a verification link to your email address. Click it to complete your registration.</p>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="card bg-light border-0 text-center">
+                            <div class="card-body">
+                                <i class="bi bi-clock-history text-warning" style="font-size: 2rem;"></i>
+                                <p class="small text-muted mt-2 mb-0">24 hour expiry</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-light border-0 text-center">
+                            <div class="card-body">
+                                <i class="bi bi-exclamation-triangle text-warning" style="font-size: 2rem;"></i>
+                                <p class="small text-muted mt-2 mb-0">Check spam folder</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info border-0 mb-4">
+                    <p class="mb-2"><strong>What's next?</strong></p>
+                    <ul class="mb-0 ps-3">
+                        <li>Check your email inbox (or spam folder)</li>
+                        <li>Click the verification link</li>
+                        <li>Log in to start using OTU Found</li>
+                    </ul>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <a href="{% url 'account_login' %}" class="btn btn-primary flex-grow-1">Go to Login</a>
+                    <a href="{% url 'resend_verification' %}" class="btn btn-outline-secondary">Resend Email</a>
+                </div>
+
+                <hr class="my-4">
+
+                <p class="text-center text-muted small mb-0">
+                    Already verified? <a href="{% url 'account_login' %}">Click here to login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-light-success {
+        background-color: rgba(25, 135, 84, 0.1) !important;
+    }
+</style>
+{% endblock %}

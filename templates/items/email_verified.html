@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Email Verified - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card shadow-lg border-0">
+            <div class="card-body p-5">
+                <div class="text-center mb-5">
+                    <div class="mb-4">
+                        <i class="bi bi-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    <h2 class="mb-2">Email Verified</h2>
+                    <p class="text-muted mb-0">Your account is ready to use</p>
+                </div>
+
+                <div class="alert alert-success border-0 bg-light-success text-success mb-4">
+                    <h5 class="mb-2">Success!</h5>
+                    <p class="mb-0">Your email has been verified successfully. Your account is now active and you can start using OTU Found.</p>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="card bg-light border-0 text-center">
+                            <div class="card-body">
+                                <i class="bi bi-shield-check text-success" style="font-size: 2rem;"></i>
+                                <p class="small text-muted mt-2 mb-0">Account verified</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-light border-0 text-center">
+                            <div class="card-body">
+                                <i class="bi bi-person-check text-success" style="font-size: 2rem;"></i>
+                                <p class="small text-muted mt-2 mb-0">Ready to use</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info border-0 mb-4">
+                    <p class="mb-2"><strong>What can you do now?</strong></p>
+                    <ul class="mb-0 ps-3">
+                        <li>Log in to your account</li>
+                        <li>Browse lost & found items</li>
+                        <li>Post items you've lost or found</li>
+                        <li>Claim items with proof of ownership</li>
+                    </ul>
+                </div>
+
+                <a href="{% url 'account_login' %}" class="btn btn-success w-100 btn-lg">
+                    <i class="bi bi-box-arrow-in-right"></i> Login to Your Account
+                </a>
+
+                <hr class="my-4">
+
+                <p class="text-center text-muted small mb-0">
+                    Need help? <a href="{% url 'about' %}">Learn more about OTU Found</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-light-success {
+        background-color: rgba(25, 135, 84, 0.1) !important;
+    }
+</style>
+{% endblock %}

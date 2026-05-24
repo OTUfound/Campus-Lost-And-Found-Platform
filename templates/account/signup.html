@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-sm mb-3">&larr; Back to Home</a>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Create Account</h3>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-muted mb-4">
+                    Join OTU Found using your @ostimteknik.edu.tr email address.
+                </p>
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {% for error in form.non_field_errors %}
+                    {{ error }}
+                    {% endfor %}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endif %}
+
+                <form method="post" class="needs-validation">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="id_first_name" class="form-label"><strong>First Name</strong></label>
+                            <input type="text" name="first_name" id="id_first_name" class="form-control" placeholder="John" required>
+                            {% if form.first_name.errors %}
+                            <div class="invalid-feedback d-block">{{ form.first_name.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="id_last_name" class="form-label"><strong>Last Name</strong></label>
+                            <input type="text" name="last_name" id="id_last_name" class="form-control" placeholder="Doe" required>
+                            {% if form.last_name.errors %}
+                            <div class="invalid-feedback d-block">{{ form.last_name.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_email" class="form-label"><strong>Email</strong></label>
+                        <input type="email" name="email" id="id_email" class="form-control" placeholder="your.name@ostimteknik.edu.tr" required>
+                        <small class="form-text text-muted">Must be a valid @ostimteknik.edu.tr email</small>
+                        {% if form.email.errors %}
+                        <div class="invalid-feedback d-block">{{ form.email.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_password1" class="form-label"><strong>Password</strong></label>
+                        <div class="input-group">
+                            <input type="password" name="password1" id="id_password1" class="form-control" required>
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('id_password1', this)" tabindex="-1">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="form-text text-muted small mt-2">
+                            Password rules:
+                            <ul class="mb-0 ps-3">
+                                <li>At least 8 characters long</li>
+                                <li>Cannot be entirely numeric</li>
+                                <li>Cannot be too similar to your name or email</li>
+                                <li>Cannot be a commonly used password</li>
+                            </ul>
+                        </div>
+                        {% if form.password1.errors %}
+                        <div class="invalid-feedback d-block">{{ form.password1.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="id_password2" class="form-label"><strong>Confirm Password</strong></label>
+                        <div class="input-group">
+                            <input type="password" name="password2" id="id_password2" class="form-control" required>
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('id_password2', this)" tabindex="-1">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        {% if form.password2.errors %}
+                        <div class="invalid-feedback d-block">{{ form.password2.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 mb-3">Create Account</button>
+                </form>
+
+                <hr>
+
+                <p class="text-center text-muted small mb-0">
+                    Already have an account? <a href="{% url 'account_login' %}">Sign in here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

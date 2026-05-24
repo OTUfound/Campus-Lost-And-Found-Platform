@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}About - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h1 class="mb-4">About OTU Found</h1>
+
+        <h3 class="mt-4 mb-3">Our Mission</h3>
+        <p>
+            OTU Found is a secure, privacy-first lost and found system designed specifically for Ostime Teknik University.
+            We solve the critical problems of traditional campus lost-and-found systems by using technology to verify ownership
+            and protect user privacy.
+        </p>
+
+        <h3 class="mt-4 mb-3">Key Features</h3>
+        <ul>
+            <li><strong>Secure Registration:</strong> Only @ostimteknik.edu.tr email addresses can register, keeping outsiders out.</li>
+            <li><strong>Asymmetric Reporting:</strong> Detailed forms for lost items, but hidden details for found items to prevent false claims.</li>
+            <li><strong>Verified Claims:</strong> No public phone numbers. Claims are reviewed by item owners before contact is shared.</li>
+            <li><strong>Proof of Ownership:</strong> Claimants must provide specific details proving they own the item.</li>
+            <li><strong>Data Integrity:</strong> Items are never permanently deleted—soft delete maintains records for university records.</li>
+        </ul>
+
+        <h3 class="mt-4 mb-3">How Claims Work</h3>
+        <ol>
+            <li>User posts a lost or found item with photos and description.</li>
+            <li>Other users browse and search for items.</li>
+            <li>If a user believes they found/lost the item, they submit a claim with proof of ownership.</li>
+            <li>The item's original poster reviews the claim and approves or rejects it.</li>
+            <li>Upon approval, both parties are connected securely through the system.</li>
+        </ol>
+
+        <h3 class="mt-4 mb-3">Privacy & Security</h3>
+        <p>
+            We take privacy seriously. Phone numbers are never publicly displayed. Claims must be approved before
+            any contact information is exchanged. The system uses secure email verification and authentication to
+            ensure only authorized university members can participate.
+        </p>
+
+        <h3 class="mt-4 mb-3">Admin & Moderation</h3>
+        <p>
+            University security staff have access to an admin dashboard to manage categories, review disputes,
+            and moderate items when necessary.
+        </p>
+
+        <a href="{% url 'item_list' %}" class="btn btn-primary mt-4">Back Home</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}My Claims - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <a href="{% url 'item_list' %}" class="btn btn-outline-secondary mb-3">← Back to Home</a>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>My Claims</h2>
+            <a href="{% url 'item_list' %}" class="btn btn-primary">Browse More Items</a>
+        </div>
+
+        {% if my_claims %}
+        <div class="row">
+            {% for claim in my_claims %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    {% if claim.item.photo %}
+                    <img src="{{ claim.item.photo.url }}" class="card-img-top w-100" alt="{{ claim.item.title }}" style="height: auto; display: block;">
+                    {% endif %}
+
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5>{{ claim.item.title }}</h5>
+                            <span class="badge bg-{% if claim.status == 'pending' %}warning{% elif claim.status == 'approved' %}success{% else %}danger{% endif %}">
+                                {{ claim.get_status_display }}
+                            </span>
+                        </div>
+
+                        <p class="text-muted small mb-3">
+                            <strong>Item Type:</strong>
+                            <span class="badge bg-{% if claim.item.item_type == 'lost' %}danger{% else %}success{% endif %}">
+                                {{ claim.item.get_item_type_display }}
+                            </span>
+                        </p>
+
+                        <p class="text-muted small mb-2">
+                            <strong>Location:</strong> {{ claim.item.location }}<br>
+                            <strong>Posted by:</strong> {{ claim.item.posted_by.first_name }} {{ claim.item.posted_by.last_name }}<br>
+                            <strong>Claimed on:</strong> {{ claim.created_at|date:'M d, Y' }}
+                        </p>
+
+                        <div class="alert alert-info small mb-3">
+                            <strong>Your Proof:</strong>
+                            <p class="mb-0 mt-2">{{ claim.proof_description }}</p>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <a href="{% url 'item_detail' claim.item.pk %}" class="btn btn-sm btn-outline-primary flex-grow-1">
+                                View Item
+                            </a>
+                            {% if claim.status == 'approved' %}
+                            <a href="{% url 'claim_approved' claim.pk %}" class="btn btn-sm btn-success flex-grow-1">
+                                View Contact
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-info">
+            <h5>No Claims Yet</h5>
+            <p>You haven't claimed any items. Browse the items list to find something you're looking for.</p>
+            <a href="{% url 'item_list' %}" class="btn btn-primary mt-2">Browse Items</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

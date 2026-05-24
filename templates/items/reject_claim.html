@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Reject Claim - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h3 class="mb-0">Reject Claim</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning">
+                    <strong>Item:</strong> {{ claim.item.title }}<br>
+                    <strong>Claimant:</strong> {{ claim.claimant.first_name }} {{ claim.claimant.last_name }}<br>
+                    <strong>Email:</strong> {{ claim.claimant.email }}
+                </div>
+
+                <h5>Claimant's Proof of Ownership:</h5>
+                <div class="bg-light p-3 rounded mb-4">
+                    {{ claim.proof_description }}
+                </div>
+
+                <p class="text-muted">By rejecting this claim, the claimant will be notified and the item will remain available for other claims.</p>
+
+                <form method="post" class="d-flex gap-2">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Reject Claim</button>
+                    <a href="{% url 'item_detail' claim.item.pk %}" class="btn btn-outline-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

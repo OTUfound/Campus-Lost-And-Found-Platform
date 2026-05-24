@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Out - OTU Found{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-5 mx-auto">
+        <a href="{% url 'item_list' %}" class="btn btn-outline-secondary btn-sm mb-3">&larr; Back to Home</a>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-warning text-dark">
+                <h3 class="mb-0">Sign Out</h3>
+            </div>
+            <div class="card-body text-center p-5">
+                <p class="lead mb-4">Are you sure you want to sign out?</p>
+                <p class="text-muted mb-4">You'll need to sign back in to access your items and claims.</p>
+
+                <form method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-warning me-2">Yes, Sign Out</button>
+                    <a href="{% url 'item_list' %}" class="btn btn-outline-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
