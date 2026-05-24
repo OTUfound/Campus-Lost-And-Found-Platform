@@ -1,7 +1,9 @@
+{% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark otu-navbar py-2" style="border-bottom: 3px solid var(--otu-red);">
     <div class="container-lg">
-        <a class="navbar-brand fw-bold d-flex align-items-center gap-2 m-0 p-0" href="{% if user.is_authenticated %}{% url 'item_list' %}{% else %}{% url 'home' %}{% endif %}">
-            <img src="/static/includes/logo.png" alt="OSTIM Logo" height="50" class="me-2" onerror="this.style.display='none'">
+        <a class="navbar-brand fw-bold d-flex align-items-center gap-2 m-0 p-0"
+            href="{% if user.is_authenticated %}{% url 'item_list' %}{% else %}{% url 'home' %}{% endif %}">
+            <img src="{% static 'includes/logo.png' %}" alt="OTU Found Logo" height="40" class="d-inline-block align-text-center">
             <span class="text-white fs-4">OTU Found</span>
         </a>
 
@@ -18,19 +20,29 @@
             </ul>
             <div class="d-flex align-items-center gap-2">
                 <div class="dropdown">
-                    <a class="btn btn-outline-light btn-sm px-3 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    <a class="btn btn-outline-light btn-sm px-3 dropdown-toggle" href="#" role="button"
+                        data-bs-toggle="dropdown">
                         {{ user.first_name }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="bi bi-person me-2"></i>My Profile</a></li>
-                        <li><a class="dropdown-item" href="{% url 'user_items' %}"><i class="bi bi-box me-2"></i>My Items</a></li>
-                        <li><a class="dropdown-item" href="{% url 'my_claims' %}"><i class="bi bi-card-checklist me-2"></i>My Claims</a></li>
+                        <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="bi bi-person me-2"></i>My
+                                Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'user_items' %}"><i class="bi bi-box me-2"></i>My
+                                Items</a></li>
+                        <li><a class="dropdown-item" href="{% url 'my_claims' %}"><i
+                                    class="bi bi-card-checklist me-2"></i>My Claims</a></li>
                         {% if user.is_staff %}
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{% url 'admin_dashboard' %}"><i class="bi bi-speedometer2 me-2"></i>Admin Dashboard</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'admin_dashboard' %}"><i
+                                    class="bi bi-speedometer2 me-2"></i>Admin Dashboard</a></li>
                         {% endif %}
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="{% url 'account_logout' %}"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger" href="{% url 'account_logout' %}"><i
+                                    class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                     </ul>
                 </div>
             </div>

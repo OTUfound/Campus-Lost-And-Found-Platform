@@ -17,7 +17,8 @@
     <div class="col-md-4 col-lg-3">
         <div class="card item-card h-100">
             {% if item.photo %}
-            <img src="{{ item.photo.url }}" class="card-img-top w-100" alt="{{ item.title }}" style="height: 160px; object-fit: cover;">
+            <img src="{{ item.photo.url }}" class="card-img-top w-100" alt="{{ item.title }}"
+                style="height: 160px; object-fit: cover;">
             {% else %}
             <div class="bg-light d-flex align-items-center justify-content-center" style="height: 160px;">
                 <span class="text-muted">No image</span>
@@ -38,14 +39,15 @@
                         Claim Pending ({{ item.claims.pending|add:0 }})
                     </span>
                     {% else %}
-                    <span class="badge bg-success">Resolved</span>
+                    <span class="badge bg-success">Claimed</span>
                     {% endif %}
                 </p>
 
                 <div class="mt-auto">
                     <a href="{% url 'item_detail' item.pk %}" class="btn btn-primary btn-sm w-100 mb-2">View</a>
                     <div class="d-flex gap-2">
-                        <a href="{% url 'edit_item' item.pk %}" class="btn btn-outline-secondary btn-sm flex-grow-1">Edit</a>
+                        <a href="{% url 'edit_item' item.pk %}"
+                            class="btn btn-outline-secondary btn-sm flex-grow-1">Edit</a>
                         <a href="{% url 'delete_item' item.pk %}" class="btn btn-outline-danger btn-sm">Delete</a>
                     </div>
                 </div>

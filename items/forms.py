@@ -106,12 +106,13 @@ class ClaimForm(forms.ModelForm):
 
 
 class ProfileUpdateForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=150, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(max_length=150, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+
     class Meta:
         model = CustomUser
         fields = ['first_name', 'last_name', 'phone']
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': '+90 5xx xxx xx xx'

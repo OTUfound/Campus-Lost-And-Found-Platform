@@ -20,19 +20,23 @@
                 <h6 class="fw-bold mb-3" style="color:var(--otu-red)">Filter Items</h6>
                 <form method="get">
                     <div class="mb-3">
-                        <label class="form-label small fw-semibold text-muted text-uppercase" style="font-size:.75rem;letter-spacing:.5px;">Type</label>
+                        <label class="form-label small fw-semibold text-muted text-uppercase"
+                            style="font-size:.75rem;letter-spacing:.5px;">Type</label>
                         <select name="type" class="form-select form-select-sm" onchange="this.form.submit()">
                             <option value="">All Types</option>
                             <option value="lost" {% if selected_type == 'lost' %}selected{% endif %}>Lost Items</option>
-                            <option value="found" {% if selected_type == 'found' %}selected{% endif %}>Found Items</option>
+                            <option value="found" {% if selected_type == 'found' %}selected{% endif %}>Found Items
+                            </option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-semibold text-muted text-uppercase" style="font-size:.75rem;letter-spacing:.5px;">Category</label>
+                        <label class="form-label small fw-semibold text-muted text-uppercase"
+                            style="font-size:.75rem;letter-spacing:.5px;">Category</label>
                         <select name="category" class="form-select form-select-sm" onchange="this.form.submit()">
                             <option value="">All Categories</option>
                             {% for value, label in categories %}
-                            <option value="{{ value }}" {% if selected_category == value %}selected{% endif %}>{{ label }}</option>
+                            <option value="{{ value }}" {% if selected_category == value %}selected{% endif %}>{{ label }}
+                            </option>
                             {% endfor %}
                         </select>
                     </div>
@@ -53,23 +57,26 @@
                 <div class="card item-card h-100 position-relative">
                     {% if item.photo %}
                     <img src="{{ item.photo.url }}" class="card-img-top" alt="{{ item.title }}"
-                         style="height:160px;object-fit:cover;border-radius:12px 12px 0 0;">
+                        style="height:160px;object-fit:cover;border-radius:12px 12px 0 0;">
                     {% else %}
                     <div class="d-flex align-items-center justify-content-center bg-light"
-                         style="height:160px;border-radius:12px 12px 0 0;">
+                        style="height:160px;border-radius:12px 12px 0 0;">
                         <i class="bi bi-image text-muted" style="font-size:3rem;"></i>
                     </div>
                     {% endif %}
-                    <span class="badge item-badge {% if item.item_type == 'lost' %}bg-danger{% else %}bg-success{% endif %} px-3 py-2">
+                    <span
+                        class="badge item-badge {% if item.item_type == 'lost' %}bg-danger{% else %}bg-success{% endif %} px-3 py-2">
                         {{ item.get_item_type_display }}
                     </span>
                     <div class="card-body d-flex flex-column">
                         <h6 class="fw-bold mb-1">{{ item.title }}</h6>
                         <p class="text-muted small mb-2">{{ item.description|truncatewords:15 }}</p>
                         <p class="small mb-1"><i class="bi bi-geo-alt me-1" style="color:var(--otu-red)"></i>{{ item.location }}</p>
-                        <p class="small text-muted mb-3"><i class="bi bi-tag me-1"></i>{{ item.get_category_display }}</p>
+                        <p class="small text-muted mb-3"><i class="bi bi-tag me-1"></i>{{ item.get_category_display }}
+                        </p>
                         <div class="mt-auto d-flex gap-2">
-                            <a href="{% url 'item_detail' item.pk %}" class="btn btn-primary btn-sm flex-grow-1">View Details</a>
+                            <a href="{% url 'item_detail' item.pk %}" class="btn btn-primary btn-sm flex-grow-1">View
+                                Details</a>
                         </div>
                     </div>
                 </div>
