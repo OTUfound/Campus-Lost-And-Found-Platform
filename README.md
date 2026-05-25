@@ -40,7 +40,7 @@ This project demonstrates a complete implementation of a university community se
 **Authentication & Security:**
 - Django Sessions & CSRF Protection
 - Custom Email-based Verification
-- Bcrypt (password hashing)
+- PBKDF2 (Django default password hashing)
 
 **Development Tools:**
 - Git
@@ -98,7 +98,6 @@ OTUfound/
 │   ├── admin_dashboard/     # Admin interface templates
 │   ├── includes/            # Navbar, footer, and messages
 │   └── items/               # Core item pages (post, detail, claims)
-├── static/                  # Static assets (CSS, JS, Images)
 ├── media/                   # User-uploaded files (Item images)
 └── manage.py                # Django CLI tool
 ```
@@ -116,16 +115,17 @@ While you can run the app out of the box with defaults, you can configure the fo
 
 ## Main Routes
 **Authentication**
-- `GET/POST /account/login/` - Login user
-- `GET/POST /account/register/` - Register user
-- `GET/POST /account/forgot-password/` - Password recovery
+- `GET/POST /login/` - Login user
+- `GET/POST /register/` - Register user
+- `GET/POST /forgot-password/` - Password recovery
 
 **Items & Claims**
-- `GET /` - Home / Browse Items
-- `GET/POST /post/` - Create a new item
-- `GET /item/<id>/` - View item details
-- `GET/POST /item/<id>/claim/` - Submit a claim
-- `GET/POST /claim/<id>/approve/` - Approve a claim (Owner only)
+- `GET /` - Home landing page
+- `GET /items/` - Browse Items
+- `GET/POST /items/post/` - Create a new item
+- `GET /items/<id>/` - View item details
+- `GET/POST /items/<id>/claim/` - Submit a claim
+- `GET/POST /claims/<id>/approve/` - Approve a claim (Owner only)
 
 **Admin Dashboard**
 - `GET /admin-dashboard/` - Overview statistics
@@ -156,7 +156,7 @@ The application uses SQLite natively via Django ORM. Key models include:
 ## Security Features
 - Built-in Django CSRF Protection
 - Session-based authentication
-- Password hashing with Bcrypt
+- Password hashing with PBKDF2
 - Strict email domain validation
 - Route-level permissions (Staff-only access for dashboards)
 - Soft delete functionality for user accounts
