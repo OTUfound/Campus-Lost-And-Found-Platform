@@ -1,9 +1,7 @@
-{% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark otu-navbar py-2" style="border-bottom: 3px solid var(--otu-red);">
     <div class="container-lg">
         <a class="navbar-brand fw-bold d-flex align-items-center gap-2 m-0 p-0"
             href="{% if user.is_authenticated %}{% url 'item_list' %}{% else %}{% url 'home' %}{% endif %}">
-            <img src="{% static 'includes/logo.png' %}" alt="OTU Found Logo" height="40" class="d-inline-block align-text-center">
             <span class="text-white fs-4">OTU Found</span>
         </a>
 
