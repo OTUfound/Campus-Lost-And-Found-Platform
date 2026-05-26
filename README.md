@@ -57,7 +57,7 @@ This project demonstrates a complete implementation of a university community se
 git clone https://github.com/OTUfound/Campus-Lost-And-Found-Platform
 
 # Navigate to the project directory
-cd OTUfound
+cd Campus-Lost-And-Found-Platform
 
 # Set up a virtual environment (Recommended)
 python -m venv venv
