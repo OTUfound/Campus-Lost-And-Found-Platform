@@ -54,7 +54,7 @@ This project demonstrates a complete implementation of a university community se
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/OTUfound.git
+git clone https://github.com/OTUfound/Campus-Lost-And-Found-Platform
 
 # Navigate to the project directory
 cd OTUfound
