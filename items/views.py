@@ -14,7 +14,7 @@ from .forms import CustomUserCreationForm, ItemPostForm, ForgotPasswordForm, Res
 
 
 def send_verification_email(user, request):
-    token = secrets.token_urlsafe(32)
+    token = secrets.token_urlsafe(16)
     expires_at = timezone.now() + timedelta(hours=24)
 
     EmailVerificationToken.objects.create(
@@ -44,7 +44,7 @@ OTU Found Team
 
 
 def send_password_reset_email(user, request):
-    token = secrets.token_urlsafe(32)
+    token = secrets.token_urlsafe(16)
     expires_at = timezone.now() + timedelta(hours=24)
 
     PasswordResetToken.objects.create(
@@ -125,7 +125,7 @@ def logout_view(request):
 
 
 def verify_email_view(request, token):
-    token = token.strip()
+    token = token.strip().replace('=', '').replace('\r', '').replace('\n', '')
     try:
         verification_token = EmailVerificationToken.objects.get(token=token)
     except EmailVerificationToken.DoesNotExist:
@@ -220,7 +220,7 @@ def reset_password_view(request, token):
     if request.user.is_authenticated:
         return redirect('item_list')
 
-    token = token.strip()
+    token = token.strip().replace('=', '').replace('\r', '').replace('\n', '')
     try:
         reset_token = PasswordResetToken.objects.get(token=token)
     except PasswordResetToken.DoesNotExist:
