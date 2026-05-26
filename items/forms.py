@@ -144,3 +144,4 @@ class AccountPasswordChangeForm(PasswordChangeForm):
         label='Confirm New Password',
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'autocomplete': 'new-password'})
     )
+

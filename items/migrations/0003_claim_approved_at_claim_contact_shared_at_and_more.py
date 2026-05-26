@@ -26,3 +26,4 @@ class Migration(migrations.Migration):
             field=models.CharField(choices=[('whatsapp', 'WhatsApp'), ('telegram', 'Telegram'), ('phone', 'Phone')], default='whatsapp', help_text='Preferred contact method for communication', max_length=20),
         ),
     ]
+

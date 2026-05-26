@@ -7,3 +7,4 @@ class EmailDomainAdapter(DefaultAccountAdapter):
         if not email.endswith('@ostimteknik.edu.tr'):
             raise ValueError('Email must be from @ostimteknik.edu.tr domain')
         return email
+

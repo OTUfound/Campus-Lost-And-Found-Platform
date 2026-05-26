@@ -172,3 +172,4 @@ The application is ready to be deployed on platforms like:
 - **Hosting**: Render, Heroku, or DigitalOcean App Platform
 - **Static/Media Files**: AWS S3 or Cloudinary
 - **Database**: PostgreSQL (can easily swap out SQLite via settings)
+

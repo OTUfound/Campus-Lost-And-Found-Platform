@@ -40,3 +40,4 @@ class ClaimAdmin(admin.ModelAdmin):
     search_fields = ['item__title', 'claimant__email']
     readonly_fields = ['created_at', 'updated_at']
 
+

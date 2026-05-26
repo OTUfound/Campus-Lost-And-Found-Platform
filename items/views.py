@@ -629,3 +629,4 @@ def admin_delete_item(request, pk):
         item.delete()
         messages.success(request, 'Item deleted permanently.')
     return redirect('admin_items')
+

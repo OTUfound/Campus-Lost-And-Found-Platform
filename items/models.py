@@ -131,3 +131,4 @@ class Claim(models.Model):
 
     def __str__(self):
         return f"Claim for {self.item.title} by {self.claimant.email}"
+

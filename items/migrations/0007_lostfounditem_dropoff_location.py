@@ -16,3 +16,4 @@ class Migration(migrations.Migration):
             field=models.CharField(blank=True, choices=[('security', 'Security'), ('student_affairs', 'Student Affairs'), ('library', 'Library')], help_text='Where the item was dropped off (if any)', max_length=50, null=True),
         ),
     ]
+

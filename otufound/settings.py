@@ -142,3 +142,4 @@ DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER or 'no
 
 LOGIN_URL = 'account_login'
 LOGIN_REDIRECT_URL = 'home'
+
