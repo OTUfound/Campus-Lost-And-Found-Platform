@@ -125,6 +125,7 @@ def logout_view(request):
 
 
 def verify_email_view(request, token):
+    token = token.strip()
     try:
         verification_token = EmailVerificationToken.objects.get(token=token)
     except EmailVerificationToken.DoesNotExist:
@@ -219,6 +220,7 @@ def reset_password_view(request, token):
     if request.user.is_authenticated:
         return redirect('item_list')
 
+    token = token.strip()
     try:
         reset_token = PasswordResetToken.objects.get(token=token)
     except PasswordResetToken.DoesNotExist:
