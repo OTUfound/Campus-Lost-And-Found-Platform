@@ -86,6 +86,7 @@ Campus-Lost-And-Found-Platform/
 │   ├── models.py            # Database schemas
 │   ├── views.py             # Business logic & controllers
 │   ├── forms.py             # Form validation logic
+│   ├── apps.py              # App configuration
 │   ├── backends.py          # Custom authentication backend
 │   └── urls.py              # App routing
 ├── otufound/                # Django Project Settings
