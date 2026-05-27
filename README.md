@@ -6,8 +6,6 @@ OTU Found is a full-stack web application designed to streamline the process of 
 
 This project demonstrates a complete implementation of a university community service platform with email-restricted user authentication, item management, claim processing, and administrative oversight capabilities.
 
-## Live URL
-(Add your live URL here once deployed)
 
 ## Features
 - University-exclusive authentication (restricted to `@ostimteknik.edu.tr` emails)
