@@ -80,17 +80,20 @@ Open http://localhost:8000 in your browser.
 
 ## Project Structure
 ```text
-OTUfound/
+Campus-Lost-And-Found-Platform/
 ├── items/                   # Main Django App (Core Features)
 │   ├── migrations/          # Database migrations
 │   ├── models.py            # Database schemas
 │   ├── views.py             # Business logic & controllers
 │   ├── forms.py             # Form validation logic
+│   ├── backends.py          # Custom authentication backend
 │   └── urls.py              # App routing
 ├── otufound/                # Django Project Settings
 │   ├── settings.py          # Configuration
 │   ├── urls.py              # Root routing
-│   └── wsgi/asgi.py         # Entry points
+│   ├── views.py             # Homepage and static page views
+│   ├── asgi.py              # ASGI entry point
+│   └── wsgi.py              # WSGI entry point
 ├── templates/               # HTML Templates
 │   ├── account/             # Auth pages (login, register, forgot password)
 │   ├── admin_dashboard/     # Admin interface templates
